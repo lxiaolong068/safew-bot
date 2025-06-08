@@ -122,56 +122,18 @@ if ssh "${USERNAME}@${SERVER}" "cd $REMOTE_DIR && [ ! -f .env ]"; then
         ssh "${USERNAME}@${SERVER}" "cd $REMOTE_DIR && cat > .env << EOF
 # SafeW Bot 配置文件
 
-# Bot基础配置
-BOT_TOKEN=$BOT_TOKEN
-BOT_USERNAME=
+# 必需配置
+SAFEW_BOT_TOKEN=$BOT_TOKEN
 
-# 管理员配置
-ADMIN_USERS=$ADMIN_USERS
-
-# 服务器配置
-SERVER_HOST=0.0.0.0
-SERVER_PORT=8080
-
-# 日志配置
+# 可选配置
 LOG_LEVEL=$LOG_LEVEL
-LOG_FILE=logs/safew-bot.log
+POLL_TIMEOUT=30
 
-# Webhook配置 (可选)
-WEBHOOK_URL=
-WEBHOOK_SECRET=
+# 默认转发目标群组ID (可选)
+# FORWARD_TARGET_CHAT=-1001234567890
 
-# 数据库配置 (可选)
-DATABASE_TYPE=sqlite
-DATABASE_PATH=data/safew-bot.db
-
-# Redis配置 (可选)
-REDIS_ADDR=localhost:6379
-REDIS_PASSWORD=
-REDIS_DB=0
-
-# 功能开关
-ENABLE_WEBHOOK=false
-ENABLE_DATABASE=true
-ENABLE_REDIS=false
-ENABLE_METRICS=true
-ENABLE_ADMIN_COMMANDS=true
-ENABLE_MESSAGE_FORWARDING=true
-ENABLE_GROUP_MANAGEMENT=true
-
-# 限流配置
-RATE_LIMIT_ENABLED=true
-RATE_LIMIT_REQUESTS=30
-RATE_LIMIT_WINDOW=60
-
-# 文件上传配置
-MAX_FILE_SIZE=50
-ALLOWED_FILE_TYPES=jpg,jpeg,png,gif,pdf,doc,docx,txt
-
-# 安全配置
-ALLOWED_ORIGINS=*
-CORS_ENABLED=true
-HTTPS_ONLY=false
+# 超级管理员用户ID列表 (可选)
+# SUPER_ADMINS=$ADMIN_USERS
 EOF"
         
         echo -e "${GREEN}✅ 配置文件创建成功！${NC}"
